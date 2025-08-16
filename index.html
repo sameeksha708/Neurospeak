@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NeuroSpeak</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+
+    <!-- Home Screen -->
+    <div id="home" class="screen active">
+      <h1>NeuroSpeaks</h1>
+      <button>⚡ Connect EEG</button>
+      <button class="secondary" onclick="goToScreen('menu')">🎮 Use Demo Mode</button>
+      <p>Powered by EEG Signal AI</p>
+    </div>
+
+    <!-- Menu Screen -->
+   <div id="menu" class="screen">
+  <h1>Command Menu</h1>
+  <div class="menu-grid">
+    <button class="help" onclick="showOutput('Need Help')">Need Help 🚨</button>
+    <button class="medicine" onclick="showOutput('Medicine ')">Medicine 💊</button>
+    <button class="hungry" onclick="showOutput('Hungry ')">Hungry 🍽️</button>
+    <button class="call" onclick="showOutput('Call Caregiver ')">Call Caregiver 📞</button>
+    <button class="water" onclick="showOutput('Need Water')">Need Water💧</button>
+    <button class="yes" onclick="showOutput('Yes')">Yes ✅</button>
+    <button class="no" onclick="showOutput('No')">No ❌ </button>
+  </div>
+  <button onclick="goToScreen('home')">⬅ Back to home</button>
+</div>
+
+       <!-- Output Screen -->
+<div id="output" class="screen">
+  <h1>Output</h1>
+  <div class="output-box" id="outputText">...</div>
+  <button class="secondary" onclick="playSpeech()">🔊 Play</button>
+  <button class="back"  onclick="goToScreen('menu')">⬅ Back to Menu</button>
+</div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NeuroSpeak</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    .screen {
+      display: none;
+      padding: 30px;
+    }
+    .active {
+      display: block;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+    button {
+      display: block;
+      width: 250px;
+      margin: 15px auto;
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .output-box {
+      margin-top: 30px;
+      font-size: 22px;
+      font-weight: bold;
+      color: #222;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Home Screen -->
+  <div id="home" class="screen active">
+    <h1>NeuroSpeaks</h1>
+    <button onclick="goToScreen('menu')">Connect EEG</button>
+    <button onclick="goToScreen('menu')">Use Demo Mode</button>
+    <p>Powered by EEG Signal AI</p>
+  </div>
+
+  <!-- Command Menu -->
+  <div id="menu" class="screen">
+    <h1>Command Menu</h1>
+    <button onclick="showOutput('Need Help 🚨')">Need Help</button>
+    <button onclick="showOutput('Hungry 🍽️')">Hungry</button>
+    <button onclick="showOutput('Call Caregiver 📞')">Call Caregiver</button>
+    <button onclick="showOutput('Medicine 💊')">Medicine</button>
+    <button onclick="goToScreen('home')">⬅ Back</button>
+  </div>
+
+  <!-- Output Screen -->
+  <div id="output" class="screen">
+    <h1>Output</h1>
+    <div class="output-box" id="outputText">...</div>
+    <button onclick="playSpeech()">🔊 Play</button>
+    <button onclick="goToScreen('menu')">⬅ Back to Menu</button>
+  </div>
+
+  <script>
+    let currentText = "";
+
+    function goToScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+    }
+
+    function showOutput(text) {
+      currentText = text;
+      document.getElementById("outputText").innerText = text;
+      goToScreen('output');
+    }
+
+    function playSpeech() {
+      if ('speechSynthesis' in window) {
+        let utterance = new SpeechSynthesisUtterance(currentText);
+        window.speechSynthesis.speak(utterance);
+      } else {
+        alert("Speech synthesis not supported on this browser");
+      }
+    }
+  </script>
+</body>
+</html>
